@@ -55,7 +55,7 @@ class App extends Component {
         this.setState({
             inputCity: e.target.value,
         })
-        if(e.target.value.length === 2) {
+        if(e.target.value) {
             fetch("https://ctp-zip-api.herokuapp.com/city/" + e.target.value)
                 .then(res => res.json())
                 .then(jsonData => {
@@ -77,7 +77,7 @@ class App extends Component {
                     <h2>Zip Code Search</h2>
                 </div>
                 <ZipSearchField zipChanged={(e) => this.handleZipChange(e)} value={this.state.inputZip} />
-                <CitySearchField cityChanged={(e) => this.handleCityChange(e)} value={this.state.inputCity} />
+                <CitySearchField cityChanged={(e) => this.handleCityChange(e)} value={this.state.inputCity.toUpperCase()} />
                 <div>
                     { this.state.cityResults.map((item, index) => {
                         return <City data={item} key={index} />;
